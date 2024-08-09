@@ -27,6 +27,15 @@ public class RegisterModel : ModelWithCaptcha
     public string Password { get; set; } = string.Empty;
 
     /// <summary>
+    /// 学号
+    /// </summary>
+    [Required(ErrorMessageResourceName = nameof(Resources.Program.Model_StdNumberRequired),
+        ErrorMessageResourceType = typeof(Resources.Program))]
+    [RegularExpression(@"^20\d{8}$", ErrorMessageResourceName = nameof(Resources.Program.Model_MalformedStdNumber),
+        ErrorMessageResourceType = typeof(Resources.Program))]
+    public string StdNumber { get; set; } = string.Empty;
+
+    /// <summary>
     /// 邮箱
     /// </summary>
     [Required(ErrorMessageResourceName = nameof(Resources.Program.Model_EmailRequired),

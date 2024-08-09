@@ -210,8 +210,8 @@ public class DockerManager : IContainerManager
                 },
             Name = DockerMetadata.GetName(config),
             Env = config.Flag is null
-                ? [$"GZCTF_TEAM_ID={config.TeamId}"]
-                : [$"GZCTF_FLAG={config.Flag}", $"GZCTF_TEAM_ID={config.TeamId}"],
+                ? [$"TEAM_ID={config.TeamId}"]
+                : [$"FLAG={config.Flag}", $"TEAM_ID={config.TeamId}"],
             HostConfig = new()
             {
                 Memory = config.MemoryLimit * 1024 * 1024,

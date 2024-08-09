@@ -77,11 +77,11 @@ public class KubernetesManager : IContainerManager
                         ImagePullPolicy = "Always",
                         Env =
                             config.Flag is null
-                                ? [new V1EnvVar("GZCTF_TEAM_ID", config.TeamId)]
+                                ? [new V1EnvVar("TEAM_ID", config.TeamId)]
                                 :
                                 [
-                                    new V1EnvVar("GZCTF_FLAG", config.Flag),
-                                    new V1EnvVar("GZCTF_TEAM_ID", config.TeamId)
+                                    new V1EnvVar("FLAG", config.Flag),
+                                    new V1EnvVar("TEAM_ID", config.TeamId)
                                 ],
                         Ports = [new V1ContainerPort(config.ExposedPort)],
                         Resources = new V1ResourceRequirements

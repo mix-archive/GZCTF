@@ -4,7 +4,7 @@ on:
   push:
     branches: ["develop", "ci/*", "v*"]
     tags: ["v*"]
-    paths: ["src/GZCTF/**"]
+    paths: ["src/GZCTF/**", ".github/workflows/**"]
   workflow_dispatch:
 
 jobs:
@@ -13,6 +13,10 @@ jobs:
     defaults:
       run:
         working-directory: src/GZCTF
+
+    permissions:
+      packages: write
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -51,12 +55,6 @@ jobs:
       - name: Docker setup Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: gztime
-          password: ${{ secrets.DOCKER_PASSWORD }}
-
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -82,6 +80,7 @@ jobs:
             gztime/gzctf
             ghcr.io/${{ github.repository }}/gzctf
             registry.cn-shanghai.aliyuncs.com/gztime/gzctf
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           flavor: |
             latest=${{ env.RELEASE }}
           tags: |
@@ -100,17 +99,17 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
 
-      - name: Prune old packages
-        uses: vlaurin/action-ghcr-prune@v0.6.0
-        with:
-          dry-run: false
-          token: ${{ secrets.PACKAGE_TOKEN }}
-          container: ${{ github.event.repository.name }}/gzctf
-          keep-tags-regexes: ^v\d+\.\d+\.\d+$
-          prune-tags-regexes: ^[0-9a-f]{6,40}
-          keep-tags: |
-            latest
-            main
-            develop
-          keep-last: 20
-          prune-untagged: false
+      #- name: Prune old packages
+      #  uses: vlaurin/action-ghcr-prune@v0.6.0
+      #  with:
+      #    dry-run: false
+      #    token: ${{ secrets.PACKAGE_TOKEN }}
+      #    container: ${{ github.event.repository.name }}/gzctf
+      #    keep-tags-regexes: ^v\d+\.\d+\.\d+$
+      #    prune-tags-regexes: ^[0-9a-f]{6,40}
+      #    keep-tags: |
+      #      latest
+      #      main
+      #      develop
+      #    keep-last: 20
+      #    prune-untagged: false

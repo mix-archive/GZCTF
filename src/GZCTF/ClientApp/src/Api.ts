@@ -53,6 +53,12 @@ export type RegisterModel = ModelWithCaptcha & {
    * @minLength 1
    */
   password: string;
+    /**
+   * 学号
+   * @minLength 1
+   * @pattern ^20\d{8}$
+   */
+    stdNumber: string
   /**
    * 邮箱
    * @format email
@@ -633,6 +639,7 @@ export enum ChallengeTag {
   Mobile = "Mobile",
   PPC = "PPC",
   AI = "AI",
+  Abstract = 'Abstract',
 }
 
 /** 列表响应 */

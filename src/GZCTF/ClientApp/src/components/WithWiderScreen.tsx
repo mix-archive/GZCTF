@@ -6,15 +6,21 @@ import IconWiderScreenRequired from '@Components/icon/WiderScreenRequiredIcon'
 
 interface WithWiderScreenProps extends React.PropsWithChildren {
   minWidth?: number
+  override?: boolean
 }
 
-const WithWiderScreen: FC<WithWiderScreenProps> = ({ children, minWidth = 1080 }) => {
+const WithWiderScreen: FC<WithWiderScreenProps> = ({
+  children,
+  minWidth = 1080,
+  override = false,
+}) => {
   const view = useViewportSize()
 
   const { t } = useTranslation()
   const theme = useMantineTheme()
 
-  const tooSmall = minWidth > 0 && view.width > 0 && view.width < minWidth
+  let tooSmall = minWidth > 0 && view.width > 0 && view.width < minWidth
+  if (override) tooSmall = false
 
   return tooSmall ? (
     <Stack gap={0} align="center" justify="center" h="calc(100vh - 32px)">
