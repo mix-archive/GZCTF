@@ -76,10 +76,7 @@ jobs:
           # latest tag is only created for `v*.*.*` or `v*.*.*-patch.*` tags
           RELEASE: ${{ startsWith(github.ref, 'refs/tags/v') && (contains(github.ref, 'patch') || !contains(github.ref, '-')) }}
         with:
-          images: |
-#            gztime/gzctf
-            ghcr.io/${{ github.repository }}
-#            registry.cn-shanghai.aliyuncs.com/gztime/gzctf
+          images: ghcr.io/${{ github.repository }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           flavor: |
             latest=${{ env.RELEASE }}
