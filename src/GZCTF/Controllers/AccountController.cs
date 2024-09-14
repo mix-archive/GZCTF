@@ -28,6 +28,7 @@ public class AccountController(
     IOptionsSnapshot<AccountPolicy> accountPolicy,
     IOptionsSnapshot<GlobalConfig> globalConfig,
     UserManager<UserInfo> userManager,
+    ITeamRepository teamRepository,
     SignInManager<UserInfo> signInManager,
     ILogger<AccountController> logger,
     IStringLocalizer<Program> localizer) : ControllerBase
@@ -58,7 +59,7 @@ public class AccountController(
             return BadRequest(new RequestResponse(localizer[nameof(Resources.Program.Account_AvailableEmailDomain),
                 accountPolicy.Value.EmailDomainList]));
 
-        var user = new UserInfo { UserName = model.UserName, Email = model.Email, Role = Role.User };
+        var user = new UserInfo { UserName = model.UserName, Email = model.Email, StdNumber = model.StdNumber, Role = Role.User };
 
         user.UpdateByHttpContext(HttpContext);
 
@@ -76,7 +77,12 @@ public class AccountController(
 
             user = current;
         }
+        var team = await teamRepository.CreateTeam(new(){ Name = model.UserName }, user);
 
+        if (team is null)
+        {
+            logger.Log("用户个人队伍创建失败", user, TaskStatus.Failed);
+        }
         if (accountPolicy.Value.ActiveOnRegister)
         {
             user.EmailConfirmed = true;

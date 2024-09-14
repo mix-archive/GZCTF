@@ -840,6 +840,12 @@
   <data name="Model_UserNameTooShort" xml:space="preserve">
     <value>用户名过短</value>
   </data>
+  <data name="Model_StdNumberRequired" xml:space="preserve">
+    <value>学号是必需的</value>
+  </data>
+  <data name="Model_MalformedStdNumber" xml:space="preserve">
+    <value>学号格式错误</value>
+  </data>
   <data name="Model_ValidationFailed" xml:space="preserve">
     <value>校验失败，请检查输入。</value>
   </data>

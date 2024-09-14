@@ -17,6 +17,7 @@ const Register: FC = () => {
   const [retypedPwd, setRetypedPwd] = useInputState('')
   const [uname, setUname] = useInputState('')
   const [email, setEmail] = useInputState('')
+  const [stdNumber, setStdNumber] = useInputState('')
   const [disabled, setDisabled] = useState(false)
 
   const navigate = useNavigate()
@@ -91,6 +92,7 @@ const Register: FC = () => {
         userName: uname,
         password: pwd,
         email: email,
+        stdNumber: stdNumber,
         challenge: token,
       })
       const data = RegisterStatusMap.get(res.data.data)
@@ -127,16 +129,6 @@ const Register: FC = () => {
     <AccountView onSubmit={onRegister}>
       <TextInput
         required
-        label={t('account.label.email')}
-        type="email"
-        placeholder="ctf@example.com"
-        w="100%"
-        value={email}
-        disabled={disabled}
-        onChange={(event) => setEmail(event.currentTarget.value)}
-      />
-      <TextInput
-        required
         label={t('account.label.username')}
         type="text"
         placeholder="ctfer"
@@ -144,6 +136,29 @@ const Register: FC = () => {
         value={uname}
         disabled={disabled}
         onChange={(event) => setUname(event.currentTarget.value)}
+      />
+      <TextInput
+        required
+        label={t('account.label.stdNumber')}
+        type="text"
+        placeholder="2024000000"
+        w="100%"
+        value={stdNumber}
+        disabled={disabled}
+        onChange={(event) => [
+          setStdNumber(event.currentTarget.value),
+          setEmail(event.currentTarget.value + '@bupt.cn'),
+        ]}
+      />
+      <TextInput
+        required
+        label={t('account.label.email')}
+        type="email"
+        placeholder="ctf@example.com"
+        w="100%"
+        value={email}
+        disabled={disabled}
+        onChange={(event) => setEmail(event.currentTarget.value)}
       />
       <StrengthPasswordInput
         value={pwd}

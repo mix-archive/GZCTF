@@ -21,6 +21,7 @@ import {
   mdiChip,
   mdiClose,
   mdiConsole,
+  mdiEmoticonLolOutline,
   mdiEthereum,
   mdiFingerprint,
   mdiFlag,
@@ -214,6 +215,16 @@ export const useChallengeTagLabelMap = () => {
         name: ChallengeTag.AI,
         color: 'green',
         colors: theme.colors['green'],
+      },
+    ],
+    [
+      ChallengeTag.Abstract,
+      {
+        desrc: t('challenge.tag.abstract'),
+        icon: mdiEmoticonLolOutline,
+        name: ChallengeTag.Abstract,
+        color: 'yellow',
+        colors: theme.colors['yellow'],
       },
     ],
   ])

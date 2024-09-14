@@ -177,8 +177,8 @@ public class SwarmManager : IContainerManager
                             Image = config.Image,
                             Env =
                                 config.Flag is null
-                                    ? [$"GZCTF_TEAM_ID={config.TeamId}"]
-                                    : [$"GZCTF_FLAG={config.Flag}", $"GZCTF_TEAM_ID={config.TeamId}"],
+                                    ? [$"TEAM_ID={config.TeamId}"]
+                                    : [$"FLAG={config.Flag}", $"GTEAM_ID={config.TeamId}"],
                         },
                     Resources = new()
                     {

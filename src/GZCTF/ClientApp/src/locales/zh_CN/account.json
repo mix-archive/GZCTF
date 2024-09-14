@@ -8,6 +8,7 @@
     "email_new": "新邮箱",
     "real_name": "真实姓名",
     "student_id": "学工号",
+    "stdNumber": "学号",
     "password_old": "原密码",
     "password_retype": "确认密码",
     "username_or_email": "用户名或邮箱"
